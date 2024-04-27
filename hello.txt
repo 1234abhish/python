@@ -1,0 +1,17 @@
+def print_hello_triangle():
+    hello = [
+        "H  ",
+        "HE ",
+        "HEL ",
+        "HELL",
+        "HELLO",
+        
+    ]
+    
+    for line in hello:
+        print(line)
+
+
+
+if __name__ == "__main__":
+    print_hello_triangle()

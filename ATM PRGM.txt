@@ -1,0 +1,71 @@
+class ATM:
+    def __init__(self, balances):
+        self.balances = balances
+
+    def check_balance(self, username):
+        if username in self.balances:
+            return self.balances[username]
+        else:
+            return "User not found"
+
+    def withdraw_cash(self, username, amount):
+        if username in self.balances:
+            if amount > self.balances[username]:
+                return "Insufficient balance"
+            else:
+                self.balances[username] -= amount
+                return f"Withdrawal successful. Remaining balance: {self.balances[username]}"
+        else:
+            return "User not found"
+
+def authenticate(username, password):
+    # Here, you can implement your authentication logic
+    credentials = {
+        "abhi": "1111",
+        "arun": "2222",
+        "ram": "3333"
+    }
+    return credentials.get(username) == password
+
+def main():
+    # Initialize ATM with starting balances for each user
+    balances = {
+        "abhi": 10000,
+        "arun": 20000,
+        "ram": 30000,
+    }
+    atm = ATM(balances)
+
+    # Authentication loop
+    authenticated = False
+    while not authenticated:
+        username = input("Enter username: ")
+        password = input("Enter password: ")
+        authenticated = authenticate(username, password)
+        if not authenticated:
+            print("Invalid username or password. Please try again.")
+
+    # Main ATM loop
+    while True:
+        print("\n1. Check Balance")
+        print("2. Withdraw Cash")
+        print("3. Exit")
+
+        choice = int(input("Enter your choice: "))
+
+        if choice == 1:
+            print(f"Your current balance is: {atm.check_balance(username)}")
+
+        elif choice == 2:
+            amount = float(input("Enter the amount to withdraw: "))
+            print(atm.withdraw_cash(username, amount))
+
+        elif choice == 3:
+            print("Thank you for using the ATM. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please enter a valid option.")
+
+if __name__ == "__main__":
+    main()
